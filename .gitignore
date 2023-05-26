@@ -1,0 +1,24 @@
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Visual Studio
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcproj
+*.vcproj.*
+*.pdb
+*.obj
+*.exe
+*.dll
+*.user
+*.aps
+*.pch
+*.idb
+*.res
+*.pch
+*.tlb
+*.tlh
+*.manifest
+*.natvis
