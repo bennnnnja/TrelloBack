@@ -1,10 +1,13 @@
 import socket
 from Parser import handle_client
+from Database import Database
+from user import User
 
 
 
 HOST = '127.0.0.1'
 PORT = 65432
+database = Database("users.txt")
 
 
 def main():
@@ -19,6 +22,29 @@ def main():
     while True:
         
         command, message = handle_client(conn, addr)
+
+        if "NewUser" in command:
+            exists, user = database.searchfor(message)
+            if not exists:
+                login, password = message.split(":")
+                new_user = User(login, password)
+                database.write(new_user)
+                database.close()
+                conn.send(("Account created!").encode( 'utf-8'))
+            else: conn.send(("Account exists!").encode( 'utf-8'))
+
+        if "Entrance" in command:
+            accessed, user = database.searchfor(message)
+            if accessed:
+                conn.send(("Accepted!").encode('utf-8'))
+            else: 
+                
+                conn.send(("Declined!").encode('utf-8'))
+
+        if "UnloadUsers" in command:
+
+            UnUsers = database.unload_users()
+            conn.send((f"{UnUsers}").encode('utf-8'))
 
 
 if __name__ == "__main__":
