@@ -22,4 +22,4 @@
 *.tlh
 *.manifest
 *.natvis
-*.vs
+.vs/
