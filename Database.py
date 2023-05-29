@@ -6,13 +6,17 @@ class Database:
         self.db_name = db_name
         self.db_file = open(db_name, "a+")
 
-    def write(self, user: user): # возможность записи
+<<<<<<< HEAD
+    def write(self, data): # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+=======
+    def write(self, user: user): # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+>>>>>>> parent of db31e9d (added entyties, added folder system and else)
         self.db_file = open(self.db_name, "a+")
         self.db_file.write(user.getInfo()) 
         self.db_file.write("\n")
         self.db_file.close()
 
-    def read_all(self): # возможность чтения
+    def read_all(self): # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         self.db_file.seek(0)
         return self.db_file.readlines()
 
@@ -26,7 +30,7 @@ class Database:
 
     
 
-    def update(self, key, value, new_data): # возможность обновления
+    def update(self, key, value, new_data): # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         lines = self.read_all()
         self.db_file.seek(0)
         self.db_file.truncate(0)
@@ -35,7 +39,7 @@ class Database:
                 line = new_data
             self.db_file.write(line)
 
-    def delete(self, key, value): # возможность удаления
+    def delete(self, key, value): # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         lines = self.read_all()
         self.db_file.seek(0)
         self.db_file.truncate(0)
@@ -44,7 +48,7 @@ class Database:
                 self.db_file.write(line)
 
 
-    def unload_users(self): # выгрузка пользователей с возможность взаимодействия в цикле
+    def unload_users(self): # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
         a = ""
         with open(self.db_name, "r") as file:
             for line in file:
