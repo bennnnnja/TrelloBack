@@ -1,4 +1,3 @@
-import user
 
 class Database: 
 
@@ -6,9 +5,9 @@ class Database:
         self.db_name = db_name
         self.db_file = open(db_name, "a+")
 
-    def write(self, user: user): # возможность записи
+    def write(self, data): # возможность записи
         self.db_file = open(self.db_name, "a+")
-        self.db_file.write(user.getInfo()) 
+        self.db_file.write(data) 
         self.db_file.write("\n")
         self.db_file.close()
 
