@@ -3,4 +3,4 @@ nikitaa:doing:public
 begulaa:to doing:private
 testsss:to:private
 testsss:asdadad:public
-begulaa:doingnotdoing:public
+begulaa:doingnotdoing:publicbegulaa:tyrytr:public
