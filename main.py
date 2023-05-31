@@ -48,13 +48,11 @@ def main():
         if "UnloadData" in command:
             data = ""
             with open("data/desks.txt") as f:
-                for i in f:
-                    print(str(i).split(":")[2])
+                for i in f:                    
                     if str(i).split(":")[2] =="public\n":
                         data += str(i)
                     elif str(i).split(":")[0] == f"{current_user}":
-                        data += str(i)
-            print(data)
+                        data += str(i)            
             conn.send((f"{data}").encode('utf-8'))
 
         
