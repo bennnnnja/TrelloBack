@@ -1,16 +1,21 @@
 import user
 
+
+
+
 class Database: 
 
     def __init__(self, db_name):
         self.db_name = db_name
         self.db_file = open(db_name, "a+")
 
-    def write(self, user: user): # возможность записи
-        self.db_file = open(self.db_name, "a+")
-        self.db_file.write(user.getInfo()) 
-        self.db_file.write("\n")
-        self.db_file.close()
+    
+
+    def write(self, data):
+        new_id = self.get_max_id() + 1
+        with open(self.db_name, 'a') as file:
+            file.write(f"{new_id}:{data}\n")
+            self.db_file.close()
 
 
     def searchfor(self, value: str):                
@@ -20,6 +25,18 @@ class Database:
                         return True, str(i)
                                               
         return False, ""
+
+    def get_max_id(self):
+        max_id = 0
+        with open(self.db_name, 'r') as file:
+            for line in file:
+                current_id = int(line.split(':')[0])
+                if current_id > max_id:
+                    max_id = current_id
+        self.db_file.close()            
+        return max_id
+
+    
 
     
 

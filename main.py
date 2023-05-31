@@ -1,21 +1,27 @@
 import socket
 from Parser import handle_client
 from Database import Database
-from user import User
+from entyties import Desk
+from entyties import User
 
 
 
 HOST = '127.0.0.1'
 PORT = 65432
 users = Database("data/users.txt")
-desks = Database("data/desks/desks.txt")
-columns = Database("data/columns/columns.txt")
-cards = Database("data/cards/cards.txt")
+
 user = "begula:12345678"
 
 def main():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((HOST, PORT))
+    server_socket.listen(1)
+    conn, addr = server_socket.accept()
+    print(f"server is on {HOST}:{PORT}")   
+    print(f"connected: {addr}")
 
+    while True:
+        
         command, message = handle_client(conn, addr)
 
         if "NewUser" in command:
@@ -33,7 +39,7 @@ def main():
             if accessed:
                 conn.send(("Accepted!").encode('utf-8'))
             else: 
-
+                
                 conn.send(("Declined!").encode('utf-8'))
 
         if "NewDesk" in command: 
@@ -46,13 +52,12 @@ def main():
             desk, column = message.split("!")
             with open (f"data/desks/{desk}.txt", "a+") as db: 
                 db.write(f"{column}")
+                
 
+        
 
-
-
-
+        
 
 
 if __name__ == "__main__":
-Expand Down
-	
+    main()
