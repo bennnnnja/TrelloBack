@@ -67,6 +67,17 @@ def main():
                 conn.send(("Desk created!").encode( 'utf-8'))
             else: conn.send(("Desk exists!").encode( 'utf-8'))
 
+        if "NewJson" in command:
+            with open("data/newjson.txt", "a+") as f:
+                f.write(message)
+
+        if "UnloadJson" in command:
+            data=""
+            with open('data/newjson.txt', 'r') as f:
+                for i in f:
+                    data+=str(i)
+            conn.send((f"{data}").encode('utf-8'))
+
         
 
             
