@@ -5,11 +5,13 @@ from entyties import Desk
 from entyties import User
 
 
-
 HOST = '127.0.0.1'
 PORT = 65432
 users = Database("data/users.txt")
-user = "begula:12345678"
+desks = Database("data/desks.txt")
+
+
+
 
 def main():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -18,6 +20,7 @@ def main():
     conn, addr = server_socket.accept()
     print(f"server is on {HOST}:{PORT}")   
     print(f"connected: {addr}")
+    current_user="None"
 
     while True:
         
@@ -34,21 +37,40 @@ def main():
             else: conn.send(("Account exists!").encode( 'utf-8'))
 
         if "Entrance" in command:
-            accessed, user = users.searchfor(message)
+            accessed, current_user = users.searchfor(message)
+            current_user = current_user.split(":")[0]
             if accessed:
                 conn.send(("Accepted!").encode('utf-8'))
             else: 
                 
                 conn.send(("Declined!").encode('utf-8'))
 
-        if "NewDesk" in command: 
-            user = "begula:12345678"
-            name, desktype = message.split("!")
-            new_desk = Desk(name, user.split(":")[0], desktype)
-            new_desk.create() 
+        if "UnloadData" in command:
+            data = ""
+            with open("data/desks.txt") as f:
+                for i in f:
+                    print(str(i).split(":")[2])
+                    if str(i).split(":")[2] =="public\n":
+                        data += str(i)
+                    elif str(i).split(":")[0] == f"{current_user}":
+                        data += str(i)
+            print(data)
+            conn.send((f"{data}").encode('utf-8'))
 
-        if "AddColumn" in command:            
-            desk, column = message.split("!")
+        
+
+        if "NewDesk" in command:
+            exists, desk = desks.searchfor(message)
+            if not exists:
+                desk_name, desk_type = message.split(":")
+                new_desk = Desk(current_user.split(":")[0], desk_name, desk_type)
+                desks.write(new_desk)
+                desks.close()
+                conn.send(("Desk created!").encode( 'utf-8'))
+            else: conn.send(("Desk exists!").encode( 'utf-8'))
+
+        
+
             
                 
 
