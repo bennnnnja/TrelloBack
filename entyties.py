@@ -28,23 +28,24 @@ class Desk:
 
 class Column: 
 
-    def __init__(self, name, owner, parent):
+    def __init__(self, name, owner, desk_id):
         self.name = name 
         self.owner = owner 
-        self.parent = parent 
+        self.desk_id = desk_id 
 
 
     def create(self):        
-        desks.write(f"{self.owner}!{self.name}!{self.parent}")
+        desks.write(f"{self.owner}!{self.name}!{self.parent}!{self.desk_id}")
 
 class Card: 
 
-    def __init__(self, name, owner, content):
+    def __init__(self, name, owner, content, column_id):
         self.name = name 
         self.owner = owner 
         self.content = content 
+        self.column_id = column_id 
 
 
     def create(self):        
-        desks.write(f"{self.owner}!{self.name}!{self.content}")
+        desks.write(f"{self.owner}!{self.name}!{self.content}!{self.column_id}")
 

@@ -44,13 +44,12 @@ def main():
         if "NewDesk" in command: 
             user = "begula:12345678"
             name, desktype = message.split("!")
-            new_desk = Desk(name, user, desktype)
+            new_desk = Desk(name, user.split(":")[0], desktype)
             new_desk.create() 
 
         if "AddColumn" in command:            
             desk, column = message.split("!")
-            with open (f"data/desks/{desk}.txt", "a+") as db: 
-                db.write(f"{column}")
+            
                 
 
         
