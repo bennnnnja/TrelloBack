@@ -15,8 +15,7 @@ user = "begula:12345678"
 
 def main():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-Expand All
-	@@ -23,27 +27,38 @@ def main():
+
         command, message = handle_client(conn, addr)
 
         if "NewUser" in command:
@@ -55,3 +54,5 @@ Expand All
 
 
 if __name__ == "__main__":
+Expand Down
+	
