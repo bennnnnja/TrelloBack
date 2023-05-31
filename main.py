@@ -9,7 +9,6 @@ from entyties import User
 HOST = '127.0.0.1'
 PORT = 65432
 users = Database("data/users.txt")
-
 user = "begula:12345678"
 
 def main():
